@@ -1,0 +1,169 @@
+--Vistas
+
+CREATE VIEW proyecto_finalizado AS
+SELECT id_proyecto, nombre, ubicacion, fecha_inicio, fecha_finalizacion
+FROM Proyecto
+WHERE estado = 'Finalizado';
+
+CREATE VIEW proyecto_en_progreso AS
+SELECT id_proyecto, nombre, ubicacion, fecha_inicio, fecha_finalizacion
+FROM Proyecto
+WHERE estado = 'En Progreso';
+
+CREATE VIEW trabajo_personal AS
+Select po.id_personal,
+po.NOMBRE as nombre_personal,
+po.APELLIDO,
+p.id_proyecto,
+p.nombre as nombre_proyecto,
+t.id_tarea,
+t.descripcion
+
+From Personal_obra po,
+Tareas t,
+Proyecto p
+
+WHERE p.estado = 'En Progreso';
+
+CREATE VIEW vista_materiales_por_proyecto AS
+SELECT 
+    mp.ID_MATERIAL,
+    mp.NOMBRE_MATERIAL,
+    p.ID_PROYECTO,
+    p.nombre as nombre_proyecto,
+    SUM(CANTIDAD) AS TOTAL_CANTIDAD,
+    mp.UNIDAD_MEDIDA
+FROM 
+    materiales_proyectos mp,
+    proyecto p
+WHERE
+    P.ID_PROYECTO = MP.ID_PROYECTO
+GROUP BY 
+    ID_PROYECTO, ID_MATERIAL, NOMBRE_MATERIAL
+ORDER BY 
+    ID_PROYECTO ASC;
+
+CREATE VIEW antiguedad AS
+SELECT
+    ID_PERSONAL,
+    NOMBRE,
+    APELLIDO,
+    TIPO,
+    DIRECCION,
+    FECHA_ALTA,
+    DATEDIFF(IF(FECHA_BAJA IS NULL, CURDATE(), FECHA_BAJA), FECHA_ALTA) AS ANTIGUEDAD_DIAS
+FROM
+    PERSONAL_OBRA;
+
+--Funciones
+
+DELIMITER //
+
+CREATE FUNCTION TotalTareasPorTrabajador(personalID INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE total INT;
+    SELECT COUNT(*) INTO total
+    FROM TAREAS
+    WHERE ID_PERSONAL = personalID;
+    
+    RETURN total;
+END//
+
+DELIMITER ; 
+
+
+DELIMITER //
+
+CREATE FUNCTION TotalPersonalPorProyecto (proyectoID INT)
+RETURNS DECIMAL(10, 2)
+DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10, 2) DEFAULT 0;
+    
+    SELECT COUNT(ID_PERSONAL) INTO total
+    FROM personal_obra
+    WHERE ID_PROYECTO = proyectoID;
+    
+    RETURN total;
+END //
+
+DELIMITER; 
+
+--Stored Procedures
+
+DELIMITER //
+CREATE PROCEDURE RegistrarBajaPersonal(
+    IN personalID INT,
+    IN fechaBaja DATE
+)
+BEGIN
+    UPDATE PERSONAL_OBRA
+    SET FECHA_BAJA = fechaBaja
+    WHERE ID_PERSONAL = personalID;
+END//
+
+DELIMITER; 
+
+
+DELIMITER //
+
+CREATE PROCEDURE UpdateTarea(
+    IN p_id_tarea INT,
+    IN p_id_proyecto INT,
+    IN p_id_personal INT,
+    IN p_nombre VARCHAR(45),
+    IN p_descripcion VARCHAR(45),
+    IN p_fecha_inicio DATE,
+    IN p_fecha_finalizacion DATE
+)
+BEGIN
+    UPDATE TAREAS
+    SET ID_PROYECTO = p_id_proyecto,
+        ID_PERSONAL = p_id_personal,
+        NOMBRE = p_nombre,
+        DESCRIPCION = p_descripcion,
+        FECHA_INICIO = p_fecha_inicio,
+        FECHA_FINALIZACION = p_fecha_finalizacion
+    WHERE ID_TAREA = p_id_tarea;
+END //
+
+DELIMITER ;
+
+--Triggers
+
+DELIMITER //
+
+CREATE TRIGGER ActualizarFechaTareas
+AFTER UPDATE ON PROYECTO
+FOR EACH ROW
+BEGIN
+   
+    IF NEW.FECHA_FINALIZACION IS NOT NULL AND OLD.FECHA_FINALIZACION <> NEW.FECHA_FINALIZACION THEN
+        UPDATE TAREAS
+        SET FECHA_FINALIZACION = NEW.FECHA_FINALIZACION
+        WHERE ID_PROYECTO = NEW.ID_PROYECTO
+          AND FECHA_FINALIZACION > NEW.FECHA_FINALIZACION;
+    END IF;
+END//
+
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER VerificarAltaPersonalAntesDeAsignarTarea
+BEFORE INSERT ON TAREAS
+FOR EACH ROW
+BEGIN
+    DECLARE fechaAlta DATE;
+    SELECT FECHA_ALTA INTO fechaAlta
+    FROM PERSONAL_OBRA
+    WHERE ID_PERSONAL = NEW.ID_PERSONAL;
+    
+    IF fechaAlta IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede asignar tarea a personal sin fecha de alta.';
+    END IF;
+END//
+
+DELIMITER ;
