@@ -1,0 +1,295 @@
+INSERT INTO Proyecto (id_proyecto, nombre, ubicacion, fecha_inicio, fecha_finalizacion) VALUES
+(1, 'Edificio Central', 'Nueva Córdoba', '2024-01-15', '2025-06-15'),
+(2, 'Housing Las Rosas', 'Villa Allende', '2023-09-10', '2024-03-01'),
+(3, 'Centro Comercial Lomas', 'Alta Córdoba', '2023-06-01', '2024-12-01'),
+(4, 'Residencial Norte', 'Cerro de las Rosas', '2023-11-01', '2025-03-01'),
+(5, 'Torre Sur', 'Nueva Córdoba', '2024-02-15', '2025-08-01'),
+(6, 'Edificio Crdoba', 'Nueva Córdoba', '2024-01-15', '2025-06-15'),
+(7, 'Housing Mediland', 'Villa Allende', '2023-09-10', '2024-03-01'),
+(8, 'Centro Comercial ALto', 'Alta Córdoba', '2023-06-01', '2024-12-01'),
+(9, 'Residencial Rosas', 'Cerro de las Rosas', '2023-11-01', '2025-03-01'),
+(10, 'Torre Catalina', 'Nueva Córdoba', '2024-02-15', '2025-08-01'),
+(11, 'Edificio Central', 'Nueva Córdoba', '2024-01-15', '2025-06-15'),
+(12, 'Housing Villa', 'Villa Allende', '2023-09-10', '2024-03-01'),
+(13, 'Centro Comercial Palo', 'Alta Córdoba', '2023-06-01', '2024-12-01'),
+(14, 'Residencial X', 'Cerro de las Rosas', '2023-11-01', '2025-03-01'),
+(15, 'Torre Arturo', 'Nueva Córdoba', '2024-02-15', '2025-08-01'),
+(16, 'Torre Agustina', 'Nueva Córdoba', '2024-02-15', '2025-08-01'),
+(17, 'Edificio Ursula', 'Nueva Córdoba', '2024-01-15', '2025-06-15'),
+(18, 'Housing Ladrillo', 'Villa Allende', '2023-09-10', '2024-03-01'),
+(19, 'Centro Comercial Hormiga', 'Alta Córdoba', '2023-06-01', '2024-12-01'),
+(20, 'Residencial S', 'Cerro de las Rosas', '2023-11-01', '2025-03-01'),
+(21, 'Edificio Luxe', 'Nueva Córdoba', '2024-01-15', '2025-06-15'),
+(22, 'Housing Allende', 'Villa Allende', '2023-09-10', '2024-03-01'),
+(23, 'Centro Comercial Abeja', 'Alta Córdoba', '2023-06-01', '2024-12-01'),
+(24, 'Residencial Cerro', 'Cerro de las Rosas', '2023-11-01', '2025-03-01'),
+(25, 'Torre Emperador', 'Nueva Córdoba', '2024-02-15', '2025-08-01'),
+(26, 'Torre Malena', 'Nueva Córdoba', '2024-02-15', '2025-08-01'),
+(27, 'Edificio Alto', 'Nueva Córdoba', '2024-01-15', '2025-06-15'),
+(28, 'Housing Vidrio', 'Villa Allende', '2023-09-10', '2024-03-01'),
+(29, 'Centro Comercial Rosa', 'Alta Córdoba', '2023-06-01', '2024-12-01'),
+(30, 'Residencial B', 'Cerro de las Rosas', '2023-11-01', '2025-03-01');
+
+ALTER TABLE Proyecto
+ADD COLUMN estado VARCHAR(50);
+
+UPDATE Proyecto
+SET estado = 
+    CASE 
+        WHEN fecha_finalizacion < CURDATE() THEN 'Finalizado'
+        WHEN fecha_finalizacion >= CURDATE() THEN 'En Progreso'
+    END;
+
+
+INSERT INTO personal_obra (id_personal, nombre, apellido, fecha_alta, fecha_baja, direccion, tipo, id_proyecto) VALUES
+(1001, 'Carlos', 'Pérez', '2023-01-10', NULL, 'Calle Falsa 123, Córdoba', 'Propio', 1),
+(1002, 'Ana', 'Gómez', '2022-05-15', NULL, 'Av. Siempreviva 742, Córdoba', 'Subcontratista',2),
+(1003, 'Jorge', 'López', '2021-08-23', NULL, 'Calle Elm 666, Córdoba', 'Propio', 3),
+(1004, 'Lucía', 'Martínez', '2020-11-11', '2024-06-01', 'Boulevard San Juan 234, Córdoba', 'Subcontratista', 4),
+(1005, 'María', 'Rodríguez', '2023-03-01', NULL, 'Calle Las Heras 567, Córdoba', 'Propio', 5),
+(1006, 'Ricardo', 'Fernández', '2022-12-01', NULL, 'Calle Mayor 15, Córdoba', 'Propio', 6),
+(1007, 'Lorena', 'García', '2021-03-14', NULL, 'Av. Libertador 456, Córdoba', 'Subcontratista', 7),
+(1008, 'Sebastián', 'Ramírez', '2022-06-20', NULL, 'Calle Mitre 789, Córdoba', 'Propio', 8),
+(1009, 'Claudia', 'Suárez', '2020-08-30', '2023-12-01', 'Calle Belgrano 101, Córdoba', 'Subcontratista', 9),
+(1010, 'Gustavo', 'Molina', '2023-01-25', NULL, 'Calle San Martín 234, Córdoba', 'Propio', 10),
+(1011, 'Patricia', 'Mendoza', '2021-11-10', NULL, 'Calle Santa Fe 678, Córdoba', 'Subcontratista', 11),
+(1012, 'Hernán', 'Vega', '2022-03-15', NULL, 'Calle Rivadavia 345, Córdoba', 'Propio', 12),
+(1013, 'Mariana', 'Ríos', '2020-12-05', '2023-06-01', 'Calle Tucumán 567, Córdoba', 'Subcontratista', 13),
+(1014, 'Diego', 'Ortiz', '2023-05-10', NULL, 'Calle Lavalle 789, Córdoba', 'Propio', 14),
+(1015, 'Natalia', 'Giménez', '2021-02-28', NULL, 'Calle Catamarca 123, Córdoba', 'Subcontratista', 15),
+(1016, 'Federico', 'Silva', '2022-07-17', NULL, 'Calle Chacabuco 456, Córdoba', 'Propio', 16),
+(1017, 'Laura', 'Castro', '2021-09-22', NULL, 'Calle Entre Ríos 678, Córdoba', 'Subcontratista', 17),
+(1018, 'Sergio', 'Duarte', '2020-06-30', '2023-04-15', 'Calle Mendoza 234, Córdoba', 'Propio', 18),
+(1019, 'Mónica', 'Herrera', '2022-10-01', NULL, 'Calle Corrientes 345, Córdoba', 'Subcontratista', 19),
+(1020, 'Alejandro', 'Arias', '2023-02-14', NULL, 'Calle Córdoba 567, Córdoba', 'Propio', 20),
+(1021, 'Florencia', 'Peralta', '2021-07-07', NULL, 'Calle Sarmiento 789, Córdoba', 'Subcontratista', 21),
+(1022, 'Emilio', 'Cruz', '2022-11-05', NULL, 'Calle Alberdi 123, Córdoba', 'Propio', 22),
+(1023, 'Liliana', 'López', '2023-04-18', NULL, 'Calle Suipacha 234, Córdoba', 'Subcontratista', 23),
+(1024, 'Matías', 'Guzmán', '2021-12-20', NULL, 'Calle Bv. Illia 345, Córdoba', 'Propio', 24),
+(1025, 'Gabriela', 'Luna', '2022-09-15', NULL, 'Calle Velez Sarsfield 456, Córdoba', 'Subcontratista', 25),
+(1026, 'Pablo', 'Navarro', '2023-03-22', NULL, 'Calle Deán Funes 678, Córdoba', 'Propio', 26),
+(1027, 'Rocío', 'Sosa', '2021-10-12', NULL, 'Calle Colón 789, Córdoba', 'Subcontratista', 27),
+(1028, 'Javier', 'Acosta', '2022-01-01', NULL, 'Calle Belgrano 123, Córdoba', 'Propio', 28),
+(1029, 'Verónica', 'Morales', '2020-07-15', '2023-08-01', 'Calle Paraná 234, Córdoba', 'Subcontratista', 29),
+(1030, 'Oscar', 'Ledesma', '2022-04-19', NULL, 'Calle San Juan 345, Córdoba', 'Propio', 30),
+(1031, 'Marcos', 'Flores', '2021-06-03', NULL, 'Calle Caseros 456, Córdoba', 'Subcontratista', 1),
+(1032, 'Estefanía', 'Juárez', '2023-07-10', NULL, 'Calle Rioja 678, Córdoba', 'Propio', 2),
+(1033, 'Víctor', 'Ibarra', '2022-02-22', NULL, 'Calle 25 de Mayo 789, Córdoba', 'Subcontratista', 3),
+(1034, 'Camila', 'Ponce', '2021-05-14', NULL, 'Calle Entre Ríos 123, Córdoba', 'Propio', 4),
+(1035, 'Roberto', 'Benítez', '2023-08-25', NULL, 'Calle General Paz 234, Córdoba', 'Subcontratista', 5),
+(1036, 'Elena', 'Cardozo', '2020-09-30', '2023-05-01', 'Calle Güemes 345, Córdoba', 'Propio', 6),
+(1037, 'Hugo', 'Maldonado', '2022-06-11', NULL, 'Calle La Rioja 456, Córdoba', 'Subcontratista', 7),
+(1038, 'Silvia', 'Quinteros', '2021-03-28', NULL, 'Calle Fragueiro 678, Córdoba', 'Propio', 8),
+(1039, 'Martín', 'Medina', '2023-09-15', NULL, 'Calle Alvear 789, Córdoba', 'Subcontratista', 9),
+(1040, 'Carolina', 'Molina', '2022-12-10', NULL, 'Calle Oncativo 123, Córdoba', 'Propio', 10);
+
+
+INSERT INTO Tareas (id_tarea, id_proyecto, id_personal, descripcion, fecha_inicio, fecha_finalizacion) VALUES
+(1, 1, 1001, 'Colocación de cimientos', '2024-01-20', '2024-02-10'),
+(2, 2, 1002, 'Construcción de muros', '2023-09-15', '2023-11-30'),
+(3, 3, 1003, 'Colocación de vigas', '2023-06-10', '2023-07-20'),
+(4, 4, 1004, 'Encofrado de columnas', '2023-11-05', '2024-01-15'),
+(5, 5, 1005, 'Colocación de techos', '2024-02-20', '2024-05-01'),
+(6, 6, 1006, 'Instalación eléctrica', '2024-03-01', '2024-04-10'),
+(7, 7, 1007, 'Pintura de paredes', '2023-10-15', '2023-11-20'),
+(8, 8, 1008, 'Colocación de pisos', '2023-07-25', '2023-09-05'),
+(9, 9, 1009, 'Instalación sanitaria', '2023-11-10', '2024-01-05'),
+(10, 10, 1010, 'Impermeabilización de techos', '2024-02-28', '2024-04-15'),
+(11, 11, 1011, 'Construcción de escaleras', '2024-03-10', '2024-05-20'),
+(12, 12, 1012, 'Instalación de ascensores', '2023-08-05', '2023-09-30'),
+(13, 13, 1013, 'Colocación de ventanas', '2023-12-01', '2024-02-01'),
+(14, 14, 1014, 'Revoque de paredes', '2024-01-25', '2024-03-10'),
+(15, 15, 1015, 'Colocación de puertas', '2023-06-10', '2023-07-15'),
+(16, 16, 1016, 'Instalación de sistemas de seguridad', '2023-09-20', '2023-11-10'),
+(17, 17, 1017, 'Construcción de cocheras', '2023-05-15', '2023-07-01'),
+(18, 18, 1018, 'Colocación de cerámicos', '2024-02-05', '2024-03-20'),
+(19, 19, 1019, 'Colocación de aislantes', '2023-10-01', '2023-12-15'),
+(20, 20, 1020, 'Enlucido de techos', '2024-04-15', '2024-05-30'),
+(21, 21, 1021, 'Instalación de sistemas HVAC', '2023-09-01', '2023-10-20'),
+(22, 22, 1022, 'Colocación de baldosas', '2023-07-01', '2023-08-25'),
+(23, 23, 1023, 'Construcción de cercos', '2023-11-20', '2024-01-10'),
+(24, 24, 1024, 'Colocación de zócalos', '2024-03-05', '2024-04-25'),
+(25, 25, 1025, 'Construcción de terrazas', '2023-10-05', '2023-12-01'),
+(26, 26, 1026, 'Instalación de gas', '2024-01-15', '2024-03-01'),
+(27, 27, 1027, 'Pintura de exteriores', '2023-09-25', '2023-11-15'),
+(28, 28, 1028, 'Instalación de plomería', '2023-07-15', '2023-08-30'),
+(29, 29, 1029, 'Instalación de cableado', '2023-11-01', '2024-01-05'),
+(30, 30, 1030, 'Impermeabilización de paredes', '2024-02-10', '2024-04-05'),
+(31, 1, 1031, 'Colocación de revestimientos', '2023-06-20', '2023-08-10'),
+(32, 2, 1032, 'Instalación de alumbrado', '2023-10-10', '2023-12-20'),
+(33, 3, 1033, 'Colocación de cerramientos', '2023-07-30', '2023-09-15'),
+(34, 4, 1034, 'Construcción de veredas', '2023-11-25', '2024-01-30'),
+(35, 5, 1035, 'Colocación de barandas', '2024-02-25', '2024-04-15'),
+(36, 6, 1036, 'Construcción de sótanos', '2023-09-10', '2023-11-25'),
+(37, 7, 1037, 'Instalación de paneles solares', '2023-07-20', '2023-09-05'),
+(38, 8, 1038, 'Colocación de vidrios', '2023-11-15', '2024-01-20'),
+(39, 9, 1039, 'Construcción de muros exteriores', '2024-02-05', '2024-04-01'),
+(40, 10, 1040, 'Colocación de membranas', '2023-09-15', '2023-11-30'),
+(41, 11, 1001, 'Reparación de grietas', '2023-07-10', '2023-09-01'),
+(42, 12, 1002, 'Colocación de plafones', '2023-11-01', '2024-01-01'),
+(43, 13, 1003, 'Instalación de sistemas de riego', '2024-02-15', '2024-04-05'),
+(44, 14, 1004, 'Construcción de cisternas', '2023-09-20', '2023-11-30'),
+(45, 15, 1005, 'Colocación de revestimientos decorativos', '2023-07-01', '2023-09-05'),
+(46, 16, 1006, 'Instalación de tomas de corriente', '2023-11-10', '2024-01-05'),
+(47, 17, 1007, 'Colocación de pisos flotantes', '2024-03-10', '2024-05-01'),
+(48, 18, 1008, 'Instalación de sistemas de alarma', '2023-06-15', '2023-08-01'),
+(49, 19, 1009, 'Construcción de pérgolas', '2024-01-10', '2024-03-10'),
+(50, 20, 1010, 'Colocación de molduras', '2023-08-25', '2023-10-20'),
+(51, 21, 1011, 'Instalación de domótica', '2023-10-05', '2023-12-01'),
+(52, 22, 1012, 'Colocación de rodapiés', '2023-07-20', '2023-09-10'),
+(53, 23, 1013, 'Construcción de divisiones interiores', '2023-11-15', '2024-01-20'),
+(54, 24, 1014, 'Colocación de paneles acústicos', '2024-02-10', '2024-03-25'),
+(55, 25, 1015, 'Construcción de escaleras exteriores', '2023-09-01', '2023-11-15'),
+(56, 26, 1016, 'Colocación de cercos perimetrales', '2023-07-25', '2023-09-15'),
+(57, 27, 1017, 'Instalación de chimeneas', '2023-12-05', '2024-02-20'),
+(58, 28, 1018, 'Colocación de mosaicos', '2024-03-01', '2024-05-01'),
+(59, 29, 1019, 'Construcción de techos verdes', '2023-06-01', '2023-08-10'),
+(60, 30, 1020, 'Colocación de sistemas de calefacción', '2023-10-15', '2023-12-30');
+UPDATE Tareas
+SET nombre = CONCAT('xxx ', id_tarea);
+
+
+INSERT INTO Materiales (id_material, descripcion, unidad_medida, cantidad) VALUES
+(1, 'Cemento Portland', 'bolsa', 100),
+(2, 'Arena gruesa', 'm3', 2000),
+(3, 'Ladrillos comunes', 'unidades', 6000),
+(4, 'Hierro de construcción', 'toneladas', 20),
+(5, 'Mallas de acero', 'rollos', 200),
+(6, 'Piedra triturada', 'm3', 1500),
+(7, 'Grava', 'm3', 1000),
+(8, 'Yeso', 'bolsas', 500),
+(9, 'Cal', 'bolsas', 300),
+(10, 'Adhesivo cerámico', 'baldes', 250),
+(11, 'Tejas cerámicas', 'unidades', 3000),
+(12, 'Bloques de hormigón', 'unidades', 4000),
+(13, 'Pintura blanca', 'litros', 1000),
+(14, 'Pintura de exteriores', 'litros', 800),
+(15, 'Barniz', 'litros', 600),
+(16, 'Cemento rápido', 'bolsas', 200),
+(17, 'Placas de yeso', 'unidades', 2500),
+(18, 'Aislante térmico', 'rollos', 500),
+(19, 'Madera para encofrado', 'm3', 300),
+(20, 'Tubería PVC', 'metros', 5000),
+(21, 'Cables eléctricos', 'metros', 1000),
+(22, 'Grifería de baño', 'sets', 150),
+(23, 'Grifería de cocina', 'sets', 100),
+(24, 'Ventanas de aluminio', 'unidades', 450),
+(25, 'Puertas de madera', 'unidades', 200),
+(26, 'Planchas de acero', 'toneladas', 30),
+(27, 'Chapacorrugada', 'm2', 2500),
+(28, 'Cerámica para pisos', 'm2', 4000),
+(29, 'Revoque grueso', 'm3', 350),
+(30, 'Revoque fino', 'm3', 30),
+(31, 'Impermeabilizante', 'litros', 700),
+(32, 'Sellador de juntas', 'litros', 400),
+(33, 'Clavos de acero', 'kg', 1000),
+(34, 'Bisagras', 'unidades', 1500),
+(35, 'Pernos de anclaje', 'unidades', 5000),
+(36, 'Mallas metálicas', 'm2', 3000),
+(37, 'Poliestireno expandido', 'm3', 200),
+(38, 'Cemento de albañilería', 'bolsas', 500),
+(39, 'Mortero de cemento', 'bolsas', 400),
+(40, 'Silicona líquida', 'litros', 250),
+(41, 'Cañerías de cobre', 'metros', 3000),
+(42, 'Alambre galvanizado', 'kg', 1500),
+(43, 'Perfil metálico', 'metros', 1200),
+(44, 'Vigas de acero', 'toneladas', 50),
+(45, 'Losa de hormigón', 'm3', 800),
+(46, 'Cielo raso', 'm2', 900),
+(47, 'Baldosas de cemento', 'unidades', 6000),
+(48, 'Azulejos cerámicos', 'm2', 3500),
+(49, 'Vidrios templados', 'm2', 2000),
+(50, 'Manijas de puertas', 'unidades', 750),
+(51, 'Fijaciones metálicas', 'kg', 2000),
+(52, 'Cinta aislante', 'rollos', 500),
+(53, 'Tornillos para madera', 'kg', 1200),
+(54, 'Rodapié', 'metros', 4000),
+(55, 'Ventilación mecánica', 'unidades', 100),
+(56, 'Sistemas de alarma', 'sets', 50),
+(57, 'Cableado de fibra óptica', 'metros', 1500),
+(58, 'Paneles solares', 'unidades', 300),
+(59, 'Baterías de almacenamiento', 'unidades', 200),
+(60, 'Tubos fluorescentes', 'unidades', 1000);
+
+
+INSERT INTO maquinaria (id_maquinaria, id_proyecto, id_personal, nombre, descripcion) VALUES
+(1, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Excavadora', 'Excavadora de uso pesado'),
+(2, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Grua', 'Grua torre de 30m de altura'),
+(3, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Bulldozer', 'Máquina para nivelación de terrenos'),
+(4, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Retroexcavadora', 'Excavadora con retro para trabajos de demolición'),
+(5, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Cargadora', 'Máquina cargadora de materiales pesados'),
+(6, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Compresor', 'Compresor de aire para construcción'),
+(7, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Hormigonera', 'Máquina para mezclar concreto'),
+(8, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Rodillo compactador', 'Rodillo para compactación de suelos'),
+(9, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Martillo hidráulico', 'Martillo para demolición'),
+(10, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Motoniveladora', 'Máquina para nivelar el terreno'),
+(11, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Taladro neumático', 'Taladro para perforación de terrenos'),
+(12, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Generador eléctrico', 'Generador para suministrar energía'),
+(13, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Pala cargadora', 'Pala para cargar material en camiones'),
+(14, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Camión volquete', 'Camión para transporte de material'),
+(15, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Elevador', 'Elevador hidráulico para materiales pesados'),
+(16, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Perforadora', 'Máquina para perforación en roca'),
+(17, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Plataforma elevadora', 'Plataforma para trabajos en altura'),
+(18, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Carretilla elevadora', 'Máquina para transporte de materiales en palés'),
+(19, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Zanjadora', 'Máquina para abrir zanjas en el suelo'),
+(20, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Grua móvil', 'Grua de gran capacidad para mover cargas pesadas'),
+(21, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Cizalla', 'Cizalla hidráulica para corte de metales'),
+(22, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Trituradora', 'Máquina para triturar materiales'),
+(23, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Fresadora', 'Máquina para fresar superficies'),
+(24, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Compactadora de suelos', 'Máquina para compactar terrenos sueltos'),
+(25, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Mezcladora de cemento', 'Mezcladora de alta capacidad para cemento'),
+(26, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Cortadora de asfalto', 'Cortadora industrial para asfalto y hormigón'),
+(27, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Camión hormigonera', 'Camión para el transporte de concreto fresco'),
+(28, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Pavimentadora', 'Máquina para pavimentar superficies'),
+(29, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Excavadora pequeña', 'Excavadora para trabajos en espacios reducidos'),
+(30, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Cargadora frontal', 'Máquina para cargar materiales pesados'),
+(31, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Cizalla móvil', 'Cizalla para corte en terrenos'),
+(32, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Grua de construcción', 'Grua para levantar grandes estructuras'),
+(33, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Martillo neumático', 'Martillo neumático para demolición de suelos'),
+(34, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Compactadora', 'Máquina para compactación de suelos en proyectos'),
+(35, FLOOR(1 + (RAND() * 30)), FLOOR(1001 + (RAND() * 40)), 'Compresor', 'Compresor de aire para construcción');
+
+SET @num_parts = 6;
+SET @min_proyecto_id = 1;
+SET @max_proyecto_id = 30;
+
+INSERT INTO materiales_proyectos (id_proyecto, id_material, id_tarea, nombre_material, unidad_medida, cantidad)
+SELECT
+    FLOOR(RAND() * (@max_proyecto_id - @min_proyecto_id + 1)) + @min_proyecto_id AS id_proyecto,
+    m.id_material,
+    FLOOR(RAND() * (SELECT MAX(ID_TAREA) FROM tareas) + 1) AS id_tarea,
+    m.descripcion AS nombre_material,
+    m.unidad_medida,
+    m.cantidad / @num_parts AS cantidad
+FROM
+    Materiales m;
+
+SET @num_parts = 2;
+SET @min_proyecto_id = 1;
+SET @max_proyecto_id = 30;
+
+INSERT INTO materiales_proyectos (id_proyecto, id_material, id_tarea, nombre_material, unidad_medida, cantidad)
+SELECT
+    FLOOR(RAND() * (@max_proyecto_id - @min_proyecto_id + 1)) + @min_proyecto_id AS id_proyecto,
+    m.id_material,
+    FLOOR(RAND() * (SELECT MAX(ID_TAREA) FROM tareas) + 1) AS id_tarea,
+    m.descripcion AS nombre_material,
+    m.unidad_medida,
+    m.cantidad / @num_parts AS cantidad
+FROM
+    Materiales m;
+
+SET @num_parts = 3;
+SET @min_proyecto_id = 1;
+SET @max_proyecto_id = 30;
+
+INSERT INTO materiales_proyectos (id_proyecto, id_material, id_tarea, nombre_material, unidad_medida, cantidad)
+SELECT
+    FLOOR(RAND() * (@max_proyecto_id - @min_proyecto_id + 1)) + @min_proyecto_id AS id_proyecto,
+    m.id_material,
+    FLOOR(RAND() * (SELECT MAX(ID_TAREA) FROM tareas) + 1) AS id_tarea,
+    m.descripcion AS nombre_material,
+    m.unidad_medida,
+    m.cantidad / @num_parts AS cantidad
+FROM
+    Materiales m;
