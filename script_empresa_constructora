@@ -66,3 +66,28 @@ CREATE TABLE PROYECTO (
         PRIMARY KEY (ID_MAQUINARIA),
         FOREIGN KEY (ID_PROYECTO) REFERENCES PROYECTO (ID_PROYECTO),
         FOREIGN KEY (ID_PERSONAL) REFERENCES PERSONAL_OBRA (ID_PERSONAL));
+
+CREATE TABLE Clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    razon_social VARCHAR(150) NOT NULL,
+    id_proyecto INT,
+    FOREIGN KEY (id_proyecto) REFERENCES proyecto (id_proyecto)
+);
+
+CREATE TABLE proveedores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    razon_social VARCHAR(150) NOT NULL,
+    valoracion INT NOT NULL CHECK (valoracion BETWEEN 1 AND 5)
+);
+
+CREATE TABLE proveedores_materiales (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_material INT NOT NULL,
+    nombre_material VARCHAR(100),
+    id_cliente INT NOT NULL,
+    nombre_cliente VARCHAR(100),
+    FOREIGN KEY (id_material) REFERENCES materiales(id),
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id)
+);
