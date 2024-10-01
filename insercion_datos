@@ -326,4 +326,17 @@ INSERT INTO Clientes (nombre, razon_social, id_proyecto) VALUES
 ('Cliente29', 'Razon Social 29', 29),
 ('Cliente30', 'Razon Social 30', 30);
 
+INSERT INTO proveedores (nombre, razon_social, valoracion) VALUES
+('Corralón La Fortaleza', 'Fortaleza Materiales S.A.', 4),
+('Corralón El Constructor', 'El Constructor Córdoba SRL', 5),
+('Corralón Central', 'Central Materiales S.A.', 3),
+('Corralón Las Sierras', 'Materiales Las Sierras SRL', 4),
+('Corralón Norte', 'Norte Construcción S.A.', 5),
+('Corralón Sur', 'Sur Materiales SRL', 4),
+('Corralón Córdoba', 'Materiales Córdoba S.A.', 3),
+('Corralón El Sol', 'El Sol Construcción SRL', 5),
+('Corralón San Martín', 'San Martín Materiales S.A.', 4),
+('Corralón La Unión', 'La Unión Materiales SRL', 3);
+
+
 
