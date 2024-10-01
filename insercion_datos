@@ -293,3 +293,37 @@ SELECT
     m.cantidad / @num_parts AS cantidad
 FROM
     Materiales m;
+
+INSERT INTO Clientes (nombre, razon_social, id_proyecto) VALUES
+('Cliente1', 'Razon Social 1', 1),
+('Cliente2', 'Razon Social 2', 2),
+('Cliente3', 'Razon Social 3', 3),
+('Cliente4', 'Razon Social 4', 4),
+('Cliente5', 'Razon Social 5', 5),
+('Cliente6', 'Razon Social 6', 6),
+('Cliente7', 'Razon Social 7', 7),
+('Cliente8', 'Razon Social 8', 8),
+('Cliente9', 'Razon Social 9', 9),
+('Cliente10', 'Razon Social 10', 10),
+('Cliente11', 'Razon Social 11', 11),
+('Cliente12', 'Razon Social 12', 12),
+('Cliente13', 'Razon Social 13', 13),
+('Cliente14', 'Razon Social 14', 14),
+('Cliente15', 'Razon Social 15', 15),
+('Cliente16', 'Razon Social 16', 16),
+('Cliente17', 'Razon Social 17', 17),
+('Cliente18', 'Razon Social 18', 18),
+('Cliente19', 'Razon Social 19', 19),
+('Cliente20', 'Razon Social 20', 20),
+('Cliente21', 'Razon Social 21', 21),
+('Cliente22', 'Razon Social 22', 22),
+('Cliente23', 'Razon Social 23', 23),
+('Cliente24', 'Razon Social 24', 24),
+('Cliente25', 'Razon Social 25', 25),
+('Cliente26', 'Razon Social 26', 26),
+('Cliente27', 'Razon Social 27', 27),
+('Cliente28', 'Razon Social 28', 28),
+('Cliente29', 'Razon Social 29', 29),
+('Cliente30', 'Razon Social 30', 30);
+
+
