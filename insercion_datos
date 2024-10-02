@@ -339,14 +339,12 @@ INSERT INTO proveedores (nombre, razon_social, valoracion) VALUES
 ('Corralón La Unión', 'La Unión Materiales SRL', 3);
 
 
-INSERT INTO proveedores_materiales (id_material, id_cliente, nombre_material, nombre_cliente)
-SELECT
-    m.id_material,                               
-    FLOOR(1 + RAND() * 10) AS id_cliente,        
-    m.descripcion as descripcion_material,                        
-    (SELECT c.nombre_cliente                     
-     FROM clientes c
-     WHERE c.id_cliente = FLOOR(1 + RAND() * 10)) AS nombre_cliente
-FROM materiales m
+INSERT INTO proveedores_materiales 
+(id_material, id_cliente, nombre_material, nombre_cliente) 
+SELECT m.id_material,
+id_cliente_aleatorio,
+m.descripcion AS nombre_material,
+c.nombre AS nombre_cliente 
+FROM materiales m 
+JOIN ( SELECT FLOOR(1 + RAND() * 10) AS id_cliente_aleatorio ) AS r JOIN clientes c ON c.id = r.id_cliente_aleatorio 
 WHERE m.id_material BETWEEN 1 AND 60;
-
