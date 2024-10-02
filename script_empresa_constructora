@@ -82,6 +82,20 @@ CREATE TABLE proveedores (
     valoracion INT NOT NULL CHECK (valoracion BETWEEN 1 AND 5)
 );
 
+CREATE TABLE facturacion (
+    id_factura INT AUTO_INCREMENT PRIMARY KEY,
+    fecha_factura DATE NOT NULL,
+    id_cliente INT,
+    id_proyecto INT,
+    total_factura DECIMAL(10, 2) NOT NULL,
+    estado_factura ENUM('Pagada', 'Pendiente', 'Cancelada') DEFAULT 'Pendiente',
+    metodo_pago ENUM('Efectivo', 'Transferencia', 'Tarjeta de Crédito', 'Cheque'),
+    descripcion TEXT,
+    fecha_vencimiento DATE,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id),
+    FOREIGN KEY (id_proyecto) REFERENCES proyecto(id_proyecto)
+    );
+
 CREATE TABLE proveedores_materiales (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_material INT NOT NULL,
