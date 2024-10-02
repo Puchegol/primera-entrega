@@ -340,11 +340,11 @@ INSERT INTO proveedores (nombre, razon_social, valoracion) VALUES
 
 
 INSERT INTO proveedores_materiales 
-(id_material, id_cliente, nombre_material, nombre_cliente) 
+(id_material, id_proveedor, nombre_material, nombre_proveedor) 
 SELECT m.id_material,
-id_cliente_aleatorio,
+id_proveedor_aleatorio,
 m.descripcion AS nombre_material,
-c.nombre AS nombre_cliente 
+p.nombre AS nombre_proveedor 
 FROM materiales m 
-JOIN ( SELECT FLOOR(1 + RAND() * 10) AS id_cliente_aleatorio ) AS r JOIN clientes c ON c.id = r.id_cliente_aleatorio 
+JOIN ( SELECT FLOOR(1 + RAND() * 10) AS id_proveedor_aleatorio ) AS r JOIN proveedores c ON p.id = r.id_proveedor_aleatorio 
 WHERE m.id_material BETWEEN 1 AND 60;
