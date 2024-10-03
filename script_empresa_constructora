@@ -96,6 +96,10 @@ CREATE TABLE facturacion (
     FOREIGN KEY (id_proyecto) REFERENCES proyecto(id_proyecto)
     );
 
+ALTER TABLE materiales 
+ADD COLUMN id_proveedor INT, 
+ADD CONSTRAINT fk_id_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedores(id);  
+
 CREATE TABLE proveedores_materiales (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_material INT NOT NULL,
