@@ -355,12 +355,16 @@ FROM
 JOIN 
     Clientes c ON c.id_proyecto = p.id_proyecto;  
 
-INSERT INTO proveedores_materiales 
-(id_material, id_proveedor, nombre_material, nombre_proveedor) 
-SELECT m.id_material,
-id_proveedor_aleatorio,
-m.descripcion AS nombre_material,
-p.nombre AS nombre_proveedor 
-FROM materiales m 
-JOIN ( SELECT FLOOR(1 + RAND() * 10) AS id_proveedor_aleatorio ) AS r JOIN proveedores c ON p.id = r.id_proveedor_aleatorio 
-WHERE m.id_material BETWEEN 1 AND 60;
+INSERT INTO proveedores_materiales (id_material, nombre_material, id_proveedor, nombre_proveedor)
+SELECT 
+    m.id_material,  
+    m.descripcion AS nombre_material,  
+    m.id_proveedor,  
+    p.nombre AS nombre_proveedor 
+FROM 
+    materiales m
+JOIN 
+    proveedores p ON m.id_proveedor = p.id  
+ORDER BY 
+    m.id_material ASC;  
+
