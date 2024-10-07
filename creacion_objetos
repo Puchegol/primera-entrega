@@ -152,6 +152,19 @@ END //
 
 DELIMITER ;
 
+DELIMITER //
+
+CREATE PROCEDURE obtener_total_facturas_por_estado(IN estado VARCHAR(20))
+BEGIN
+    SELECT 
+        SUM(total_factura) AS total_facturas
+    FROM 
+        facturacion
+    WHERE 
+        estado_factura = estado;
+END //
+
+DELIMITER ;
 --Triggers
 
 DELIMITER //
