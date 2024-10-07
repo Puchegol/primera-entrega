@@ -342,18 +342,20 @@ INSERT INTO proveedores (nombre, razon_social, valoracion) VALUES
 INSERT INTO facturacion 
 (fecha_factura, id_cliente, id_proyecto, total_factura, estado_factura, metodo_pago, descripcion, fecha_vencimiento) 
 SELECT 
-    DATE_SUB(CURDATE(), INTERVAL FLOOR(RAND() * 365) DAY) AS fecha_factura,  -- Fecha aleatoria en el último año
-    c.id AS id_cliente,  -- ID de cliente correspondiente al id_proyecto
-    p.id_proyecto,  -- ID de proyecto
-    ROUND(RAND() * 10000, 2) AS total_factura,  -- Monto total aleatorio (0.00 a 10000.00)
+    DATE_SUB(CURDATE(), INTERVAL FLOOR(RAND() * 365) DAY) AS fecha_factura,
+    c.id AS id_cliente, 
+    p.id_proyecto, 
+    ROUND(RAND() * 10000, 2) AS total_factura, 
     ELT(FLOOR(1 + RAND() * 3), 'Pagada', 'Pendiente', 'Cancelada') AS estado_factura,  
     ELT(FLOOR(1 + RAND() * 4), 'Efectivo', 'Transferencia', 'Tarjeta de Crédito', 'Cheque') AS metodo_pago,  
-    CONCAT('Factura para el proyecto ', p.id_proyecto) AS descripcion,  
+    CONCAT('Factura para el proyecto ', p.id_proyecto, ' - Número ', f.factura_num) AS descripcion,  
     DATE_ADD(CURDATE(), INTERVAL 30 DAY) AS fecha_vencimiento  
 FROM 
-    (SELECT id_proyecto FROM PROYECTO ORDER BY RAND() LIMIT 50) AS p  
+    (SELECT id_proyecto FROM PROYECTO ORDER BY RAND() LIMIT 30) AS p  
 JOIN 
-    Clientes c ON c.id_proyecto = p.id_proyecto;  
+    Clientes c ON c.id_proyecto = p.id_proyecto  
+CROSS JOIN 
+    (SELECT 1 AS factura_num UNION ALL SELECT 2 UNION ALL SELECT 3) AS f;  
 
 INSERT INTO proveedores_materiales (id_material, nombre_material, id_proveedor, nombre_proveedor)
 SELECT 
