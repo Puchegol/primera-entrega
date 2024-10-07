@@ -55,6 +55,27 @@ SELECT
 FROM
     PERSONAL_OBRA;
 
+CREATE VIEW facturas_pagadas_por_proyecto AS
+SELECT 
+    f.id_factura,
+    f.fecha_factura,
+    f.id_proyecto,
+    p.nombre AS nombre_proyecto,
+    f.id_cliente,
+    c.nombre AS nombre_cliente,
+    f.total_factura,
+    f.metodo_pago,
+    f.descripcion,
+    f.fecha_vencimiento
+FROM 
+    facturacion f
+JOIN 
+    proyectos p ON f.id_proyecto = p.id_proyecto
+JOIN 
+    clientes c ON f.id_cliente = c.id
+WHERE 
+    f.estado_factura = 'Pagada';
+
 --Funciones
 
 DELIMITER //
